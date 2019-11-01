@@ -8,15 +8,16 @@
 });*/
 
 lzivpromise =
-    d3.json ("https://deezerdevs-deezer.p.rapidapi.com/search?q=led%20zeppelin%20iv", {
-"method": "GET",
-"headers": {
- "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
- "x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
-}
+    d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
 })
+
    
-lziipromise =
+/*lziipromise =
     d3.json ("https://deezerdevs-deezer.p.rapidapi.com/search?q=led%20zeppelin%20ii", {
 "method": "GET",
 "headers": {
@@ -40,7 +41,7 @@ hothpromise =
  "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
  "x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
 }
-})
+})*/
                            
 /*musicpromise.then(
    
@@ -60,17 +61,17 @@ hothpromise =
 )*/
 
 //array for all promises
-var promises = [lziiipromise,lziipromise,lzivpromise,hothpromise]
+//var promises = [lziiipromise,lziipromise,lzivpromise,hothpromise]
 
-/*lzivpromise.then(
+lzivpromise.then(
     function(data)
     {
-        console.log("goodlziv",(data))
-       
+        console.log("goodlziv",(data));
+       getAlbumCover(data);
     }
 )
 
-lziipromise.then(
+/*lziipromise.then(
     function (data)
     {
         console.log("goodlzii",(data))
@@ -90,7 +91,7 @@ hothpromise.then (
         console.log("goodhoth", (data))
        
     }
-)*/
+)
 
 //functions performed on all promises
 Promise.all (promises).then(
@@ -101,28 +102,32 @@ Promise.all (promises).then(
         getSongList(data)
     }
     
-)
+)*/
 //master function for displaying all albums
 
 
-var getAlbums = function (nms)
+var getAlbumCover = function (pic)
 
 
 {
-   
             /*var mapcrosspromises = function (prms)
             {
                 return promises.map (function ())
             }*/
-   
-   console.log("good",nms)
-    var albumtr = d3.select("#albumlist")
-    .select("tbody")
-    .selectAll("tr")
-    .data(nms.data)
+   console.log("good",pic)
+    var albumtr = d3.select("#albumcover")
+  
+    .data(pic)
     .enter()
-    .append("tr");
-   
+    .append("p")
+    .text(function(d){return d.title})
+    .append("img")
+    .attr("src", (function(d){return d.cover_big}))
+    .on("click", function (songlist)
+        {
+        return songlist.tracks.data
+    })
+}
     /*
     rows.append("td)
         .append("img")
@@ -136,7 +141,7 @@ var getAlbums = function (nms)
   //  var box2= d3.select("#albumlist")
    
     //song names
-    albumtr.append("td")
+   /* albumtr.append("td")
     .append("div")
     .text(function(d)
           {return d.title_short})
@@ -168,7 +173,7 @@ var getAlbums = function (nms)
          )
 
 
-}
+}*/
 
 
 
@@ -178,11 +183,6 @@ var getAlbums = function (nms)
 
 
 //function to be called on a click to display a song list
-//var clear = function ()
-//{
-//    d3.select("#songlist")
-  //  .remove()
-//}
 
 var clear = function ()
 {
@@ -194,7 +194,6 @@ var getSongList = function (sngnm)
 {
     console.log("goodfcn",sngnm);
     d3.select ("#songlist")
-    .append("div")
   // .append("p")
   // .select ("tbody")
    // .selectAll("tr")
