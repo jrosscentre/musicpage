@@ -18,10 +18,12 @@ td
    
 }
 
-#album
+#albumcover
 {
    
-    background-color:blueviolet;
+    width:500px;
+    height:auto;
+    
    
 }
 

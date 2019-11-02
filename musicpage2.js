@@ -68,7 +68,7 @@ lzivpromise.then(
     {
         console.log("goodlziv",(data));
        getAlbumCover(data);
-        getSongList(data);
+      
     }
 )
 
@@ -112,16 +112,38 @@ var getAlbumCover = function (alb)
 
 {
    console.log("good",alb)
-    var albumtr = d3.select("#albumcover")
-    //.select("body")
-    //.select("img")
-    //.data(pic)
+    
+   /*var albumtr = d3.select("#albumcover")
+    .select("tbody")
+    .selectAll("tr")
+    .data(alb)
+    .enter()
+    .append("tr");
+    
+    albumtr.select("tr")
+    .append("td")
+    .append("img")
+    .attr("src", function(d){return d.cover_big});
+    
+    albumtr.append("td")
+    .append("p")
+    .text(function(d) {return d.title})*/
+    
+    d3.select("#albumcover")
+    .select("img")
+    //.data(alb)
     //.enter()
-    //.append("img")
-    //.attr("src", function(d){return d.cover_big})
+    .append("p")
+    .append("img")
+    .attr("src", function(d){return d.cover_big})
+    
+    d3.select("#albumcover")
     .append("p")
     .text(alb.title)
 
+    
+    
+    
     .on("click", function (songlist)
     {
        // var alldata = songlist.flatMap(function(d)
