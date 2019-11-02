@@ -107,15 +107,11 @@ Promise.all (promises).then(
 //master function for displaying all albums
 
 
-var getAlbumCover = function (pic)
+var getAlbumCover = function (alb)
 
 
 {
-            /*var mapcrosspromises = function (prms)
-            {
-                return promises.map (function ())
-            }*/
-   console.log("good",pic)
+   console.log("good",alb)
     var albumtr = d3.select("#albumcover")
     //.select("body")
     //.select("img")
@@ -124,21 +120,25 @@ var getAlbumCover = function (pic)
     //.append("img")
     //.attr("src", function(d){return d.cover_big})
     .append("p")
-    .text(pic.title)
+    .text(alb.title)
 
     .on("click", function (songlist)
     {
-        var promisesl = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733", {
+       // var alldata = songlist.flatMap(function(d)
+        //{
+         //   return d.songlist
+       // })
+        
+        var promisesl = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733/tracks", {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
 		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
 	}
 })
-    
         promisesl.then(function (songs)
 {
-            console.log("good", songs);
+            console.log("goodsongs", songs);
             getSongList(songs);
 })
 })
@@ -152,7 +152,7 @@ var getSongList = function (song)
     .data(song)
     .enter()
     .append("li")
-    .text(function(d){return d.artist.name})
+    .text(song.data.title)
     .on("click", function (infobox)
 {
         var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733", {
@@ -161,7 +161,7 @@ var getSongList = function (song)
 		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
 		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
 	}
-    })
+})
         infopromise.then(function(info)
         {
             console.log("infogood",info)
