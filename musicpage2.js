@@ -17,31 +17,47 @@ lzivpromise =
 })
 
    
-/*lziipromise =
-    d3.json ("https://deezerdevs-deezer.p.rapidapi.com/search?q=led%20zeppelin%20ii", {
-"method": "GET",
-"headers": {
- "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
- "x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
-}
+lziipromise =
+    d3.json ("https://deezerdevs-deezer.p.rapidapi.com/album/7824595", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+
+lzipromise = d3.json ("https://deezerdevs-deezer.p.rapidapi.com/album/7820635", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
 })
 
 lziiipromise =
-    d3.json ("https://deezerdevs-deezer.p.rapidapi.com/search?q=led%20zeppelin%20iii", {
-"method": "GET",
-"headers": {
- "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
- "x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
-}
+    d3.json ("https://deezerdevs-deezer.p.rapidapi.com/album/11590966", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
 })
 hothpromise =
-    d3.json("https://deezerdevs-deezer.p.rapidapi.com/search?q=houses%20of%20the%20holy", {
-"method": "GET",
-"headers": {
- "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
- "x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
-}
-})*/
+    d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/11591216", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+
+phygpromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/9674822", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
                            
 /*musicpromise.then(
    
@@ -63,55 +79,460 @@ hothpromise =
 //array for all promises
 //var promises = [lziiipromise,lziipromise,lzivpromise,hothpromise]
 
+phygpromise.then(
+function(data)
+{
+    console.log("goodphyg")
+})
+
 lzivpromise.then(
     function(data)
     {
         console.log("goodlziv",(data));
-       getAlbumCover(data);
+       getAlbumivCover(data);
       
     }
 )
 
-/*lziipromise.then(
+lziipromise.then(
     function (data)
     {
-        console.log("goodlzii",(data))
+        console.log("goodlzii");
+        getAlbumlziiCover(data);
+        
     }
 )
+
+lzipromise.then(
+function (data)
+{
+    console.log("goodlzi");
+    getAlbumlziCover(data);
+})
 
 lziiipromise.then(
     function (data)
     {
-        console.log("goodlziii",(data))
+        console.log("goodlziii");
+        getAlbumlziiiCover(data);
     }
 )
 
 hothpromise.then (
     function (data)
     {
-        console.log("goodhoth", (data))
-       
+        console.log("goodhoth");
+       getAlbumhothCover(data);
     }
 )
 
-//functions performed on all promises
-Promise.all (promises).then(
-    function (data)
-    {
-        console.log("good",data)
-        getAlbums(data)
-        getSongList(data)
-    }
-    
-)*/
-//master function for displaying all albums
-
-
-var getAlbumCover = function (alb)
-
-
+var getAlbumlziiiCover = function (alb)
 {
-   console.log("good",alb)
+   console.log("goodphyg2",alb)
+    
+   /*var albumtr = d3.select("#albumcover")
+    .select("tbody")
+    .selectAll("tr")
+    .data(alb)
+    .enter()
+    .append("tr");
+    
+    albumtr.select("tr")
+    .append("td")
+    .append("img")
+    .attr("src", function(d){return d.cover_big});
+    
+    albumtr.append("td")
+    .append("p")
+    .text(function(d) {return d.title})*/
+    
+    d3.select("#albumcover")
+    .select("img")
+    .data(alb)
+    .enter()
+    .append("img")
+    .attr("src", function(d){return d.cover_big})
+    
+    d3.select("#albumcover")
+    .append("p")
+    .text(alb.title)
+     .on("click", function (songlist)
+    {
+       // var clear = function ()
+       // {
+       //     d3.select("#songlist")
+       //     .remove()
+       // }
+      //  clear();
+        
+        var promisesl = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/11590966/tracks", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+        promisesl.then(function (songs)
+{
+            console.log("goodsongs", songs);
+            getSongList(songs);
+})
+        
+             var getSongList = function (song)
+{
+    console.log("goodfcn",song);
+    d3.select ("#songlist")
+    .selectAll("ol")
+    .data(song.data)
+    .enter()
+    .append("li")
+    .text(function(d) {return d.title_short})
+    .on("click", function (infobox)
+{
+        var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/11590966/tracks", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+        infopromise.then(function(info)
+        {
+            console.log("infogood",info)
+            getSongInfo(info)
+        })
+})}
+})
+}
+
+
+
+//master function for dispaying led zeppelin III
+var getAlbumlziiiCover = function (alb)
+{
+   console.log("goodlziii2",alb)
+    
+   /*var albumtr = d3.select("#albumcover")
+    .select("tbody")
+    .selectAll("tr")
+    .data(alb)
+    .enter()
+    .append("tr");
+    
+    albumtr.select("tr")
+    .append("td")
+    .append("img")
+    .attr("src", function(d){return d.cover_big});
+    
+    albumtr.append("td")
+    .append("p")
+    .text(function(d) {return d.title})*/
+    
+    d3.select("#albumcover")
+    .select("img")
+    .data(alb)
+    .enter()
+    .append("img")
+    .attr("src", function(d){return d.cover_big})
+    
+    d3.select("#albumcover")
+    .append("p")
+    .text(alb.title)
+     .on("click", function (songlist)
+    {
+       // var clear = function ()
+       // {
+       //     d3.select("#songlist")
+       //     .remove()
+       // }
+      //  clear();
+        
+        var promisesl = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/11590966/tracks", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+        promisesl.then(function (songs)
+{
+            console.log("goodsongs", songs);
+            getSongList(songs);
+})
+        
+             var getSongList = function (song)
+{
+    console.log("goodfcn",song);
+    d3.select ("#songlist")
+    .selectAll("ol")
+    .data(song.data)
+    .enter()
+    .append("li")
+    .text(function(d) {return d.title_short})
+    .on("click", function (infobox)
+{
+        var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/11590966/tracks", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+        infopromise.then(function(info)
+        {
+            console.log("infogood",info)
+            getSongInfo(info)
+        })
+})}
+})
+}
+
+
+//master function for displaying led zeppelin
+var getAlbumlziCover = function (alb)
+{
+   console.log("goodlzi2",alb)
+    
+   /*var albumtr = d3.select("#albumcover")
+    .select("tbody")
+    .selectAll("tr")
+    .data(alb)
+    .enter()
+    .append("tr");
+    
+    albumtr.select("tr")
+    .append("td")
+    .append("img")
+    .attr("src", function(d){return d.cover_big});
+    
+    albumtr.append("td")
+    .append("p")
+    .text(function(d) {return d.title})*/
+    
+    d3.select("#albumcover")
+    .select("img")
+    .data(alb)
+    .enter()
+    .append("img")
+    .attr("src", function(d){return d.cover_big})
+    
+    d3.select("#albumcover")
+    .append("p")
+    .text(alb.title)
+     .on("click", function (songlist)
+    {
+       // var clear = function ()
+       // {
+       //     d3.select("#songlist")
+       //     .remove()
+       // }
+      //  clear();
+        
+        var promisesl = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/7820635/tracks", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+        promisesl.then(function (songs)
+{
+            console.log("goodsongs", songs);
+            getSongList(songs);
+})
+        
+             var getSongList = function (song)
+{
+    console.log("goodfcn",song);
+    d3.select ("#songlist")
+    .selectAll("ol")
+    .data(song.data)
+    .enter()
+    .append("li")
+    .text(function(d) {return d.title_short})
+    .on("click", function (infobox)
+{
+        var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/7820635/tracks", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+        infopromise.then(function(info)
+        {
+            console.log("infogood",info)
+            getSongInfo(info)
+        })
+})}
+})
+}
+
+
+var getAlbumhothCover = function (alb)
+{
+   console.log("goodhoth2",alb)
+    
+   /*var albumtr = d3.select("#albumcover")
+    .select("tbody")
+    .selectAll("tr")
+    .data(alb)
+    .enter()
+    .append("tr");
+    
+    albumtr.select("tr")
+    .append("td")
+    .append("img")
+    .attr("src", function(d){return d.cover_big});
+    
+    albumtr.append("td")
+    .append("p")
+    .text(function(d) {return d.title})*/
+    
+    d3.select("#albumcover")
+    .select("img")
+    .data(alb)
+    .enter()
+    .append("img")
+    .attr("src", function(d){return d.cover_big})
+    
+    d3.select("#albumcover")
+    .append("p")
+    .text(alb.title)
+     .on("click", function (songlist)
+    {
+       // var clear = function ()
+       // {
+       //     d3.select("#songlist")
+       //     .remove()
+       // }
+       // clear();
+        
+        var promisesl = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/11591216/tracks", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+        promisesl.then(function (songs)
+{
+            console.log("goodsongs", songs);
+            getSongList(songs);
+})
+        
+             var getSongList = function (song)
+{
+    console.log("goodfcn",song);
+    d3.select ("#songlist")
+    .selectAll("ol")
+    .data(song.data)
+    .enter()
+    .append("li")
+    .text(function(d) {return d.title_short})
+    .on("click", function (infobox)
+{
+        var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/11591216/tracks", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+        infopromise.then(function(info)
+        {
+            console.log("infogood",info)
+            getSongInfo(info)
+        })
+})}
+})
+}
+
+//master function for displaying led zeppelin II
+var getAlbumlziiCover = function (alb)
+{
+   console.log("goodlzii2",alb)
+    
+   /*var albumtr = d3.select("#albumcover")
+    .select("tbody")
+    .selectAll("tr")
+    .data(alb)
+    .enter()
+    .append("tr");
+    
+    albumtr.select("tr")
+    .append("td")
+    .append("img")
+    .attr("src", function(d){return d.cover_big});
+    
+    albumtr.append("td")
+    .append("p")
+    .text(function(d) {return d.title})*/
+    
+    d3.select("#albumcover")
+    .select("img")
+    .data(alb)
+    .enter()
+    .append("img")
+    .attr("src", function(d){return d.cover_big})
+    
+    d3.select("#albumcover")
+    .append("p")
+    .text(alb.title)
+     .on("click", function (songlist)
+    {
+       // var clear = function ()
+       // {
+       //     d3.select("#songlist")
+       //     .remove()
+       // }
+       // clear();
+        
+        var promisesl = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/7824595/tracks", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+        promisesl.then(function (songs)
+{
+            console.log("goodsongs", songs);
+            getSongList(songs);
+})
+        
+             var getSongList = function (song)
+{
+    console.log("goodfcn",song);
+    d3.select ("#songlist")
+    .selectAll("ol")
+    .data(song.data)
+    .enter()
+    .append("li")
+    .text(function(d) {return d.title_short})
+    .on("click", function (infobox)
+{
+        var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/7824595/tracks", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+        infopromise.then(function(info)
+        {
+            console.log("infogood",info)
+            getSongInfo(info)
+        })
+})}
+})
+}
+
+
+//master function for displaying led zeppelin IV
+var getAlbumivCover = function (alb)
+{
+   console.log("goodlziv2",alb)
     
    /*var albumtr = d3.select("#albumcover")
     .select("tbody")
@@ -140,16 +561,14 @@ var getAlbumCover = function (alb)
     d3.select("#albumcover")
     .append("p")
     .text(alb.title)
-
-    
-    
-    
     .on("click", function (songlist)
     {
-       // var alldata = songlist.flatMap(function(d)
+        //var clear = function ()
         //{
-         //   return d.songlist
-       // })
+        //    d3.select("#songlist")
+        //    .remove()
+       // }
+       // clear();
         
         var promisesl = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733/tracks", {
 	"method": "GET",
@@ -157,27 +576,26 @@ var getAlbumCover = function (alb)
 		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
 		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
 	}
-})
+	}
+)
         promisesl.then(function (songs)
 {
             console.log("goodsongs", songs);
             getSongList(songs);
 })
-})
-}
-
-var getSongList = function (song)
+        
+        var getSongList = function (song)
 {
     console.log("goodfcn",song);
     d3.select ("#songlist")
-     .select("ol")
-    .data(song)
+    .selectAll("ol")
+    .data(song.data)
     .enter()
     .append("li")
-    .text(song.data.title)
+    .text(function(d) {return d.title_short})
     .on("click", function (infobox)
 {
-        var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733", {
+        var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733/tracks", {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
@@ -191,6 +609,50 @@ var getSongList = function (song)
         })
 })}
     
+})
+}
+
+var getSongList = function (song)
+{
+    console.log("goodfcn",song);
+    d3.select ("#songlist")
+    .selectAll("ol")
+    .data(song.data)
+    .enter()
+    .append("li")
+    .text(function(d) {return d.title_short})
+    .on("click", function (infobox)
+{
+        var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733/tracks", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+        infopromise.then(function(info)
+        {
+            console.log("infogood",info)
+            getSongInfo(info)
+        })
+})}
+    
+
+var getSongInfo = function (info)
+{
+    var albumtr = d3.select("#info")
+    .select("tbody")
+    .selectAll("tr")
+    .data(info.data)
+    .enter()
+    .append("tr");
+    
+    albumtr.append("td")
+    .text(function (d) {return d.title_version})
+    
+    albumtr.append("td")
+    .text(function (d){return d.duration/60})
+}
        /// return songlist.tracks.data
 
     /*
@@ -270,12 +732,7 @@ var getSongList = function (song)
 
 
 
-var getSongInfo = function (info)
-{
-    d3.select("#info")
-    .append("div")
-    .text(info.album.title)
-}
+
 
 
 var getbigPic = function (bigpic)

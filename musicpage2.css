@@ -1,9 +1,4 @@
 
-#albumlist{
-    float:left;
-    font-size:30px;
-}
-
 
 td
 {
@@ -11,7 +6,6 @@ td
     float: left;
     background-color:skyblue;
     width:200px;
-    height:200px;
     color: aliceblue;
     font-size:30px;
    
@@ -27,18 +21,6 @@ td
    
 }
 
-#cover
-{
-   
-}
-
-#title
-{
-   
-  text-align: center;
- 
-   
-}
 
 #songlist
 {
@@ -47,37 +29,30 @@ td
     float:top;
     background-color:skyblue;
     width:500;
-    height:600;
-    color: pink;
+    height:auto;
+    color: white;
     font-size: 20px
    
    
 }
-h1{
+
+h1
+{
     color:darkgoldenrod;
+    text-align: center;
 }
-h2{
+
+h2
+{
     width:200px;
     background-color:darkblue;
     color:white;
    
    
 }
-#header{
-   
-    float:top;
-    float:left;
-    width:110px;
-}
-#header2{
-    width:170px;
-    float:left;
-   
-}
 
 #info
 {
-
     float:left;
     width:200px;
     background-color: skyblue;
