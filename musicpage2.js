@@ -68,6 +68,7 @@ lzivpromise.then(
     {
         console.log("goodlziv",(data));
        getAlbumCover(data);
+        getSongList(data);
     }
 )
 
@@ -116,18 +117,60 @@ var getAlbumCover = function (pic)
             }*/
    console.log("good",pic)
     var albumtr = d3.select("#albumcover")
-  
-    .data(pic)
-    .enter()
+    //.select("body")
+    //.select("img")
+    //.data(pic)
+    //.enter()
+    //.append("img")
+    //.attr("src", function(d){return d.cover_big})
     .append("p")
-    .text(function(d){return d.title})
-    .append("img")
-    .attr("src", (function(d){return d.cover_big}))
+    .text(pic.title)
+
     .on("click", function (songlist)
-        {
-        return songlist.tracks.data
-    })
+    {
+        var promisesl = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+})
+    
+        promisesl.then(function (songs)
+{
+            console.log("good", songs);
+            getSongList(songs);
+})
+})
 }
+
+var getSongList = function (song)
+{
+    console.log("goodfcn",song);
+    d3.select ("#songlist")
+     .select("ol")
+    .data(song)
+    .enter()
+    .append("li")
+    .text(function(d){return d.artist.name})
+    .on("click", function (infobox)
+{
+        var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+	}
+    })
+        infopromise.then(function(info)
+        {
+            console.log("infogood",info)
+            getSongInfo(info)
+        })
+})}
+    
+       /// return songlist.tracks.data
+
     /*
     rows.append("td)
         .append("img")
@@ -178,31 +221,19 @@ var getAlbumCover = function (pic)
 
 
 
-
+//tester function
+        
 
 
 
 //function to be called on a click to display a song list
-
-var clear = function ()
+        
+/*var clear = function ()
 {
     d3.select("#songlist")
     .remove()
-}
+}*/
 
-var getSongList = function (sngnm)
-{
-    console.log("goodfcn",sngnm);
-    d3.select ("#songlist")
-  // .append("p")
-  // .select ("tbody")
-   // .selectAll("tr")
-  // .append("tr")
-    //.append("td")
-   //.append("span")
-    //.data(sngnm)
-    //.enter()
-    .text(sngnm.duration)
 
     /*.append("div")
     .append("img")
@@ -214,7 +245,6 @@ var getSongList = function (sngnm)
     //.text(sngnm.title)
     /**/
     //})
-}
 
 
 
@@ -222,7 +252,8 @@ var getSongInfo = function (info)
 {
     d3.select("#info")
     .append("div")
-    .text(info.album.title)}
+    .text(info.album.title)
+}
 
 
 var getbigPic = function (bigpic)
@@ -234,7 +265,7 @@ var getbigPic = function (bigpic)
          {return d.artist.picture})
 }
 
-   
+
    
    
 /*var sortalbbox = function (button)
