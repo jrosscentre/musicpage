@@ -82,14 +82,14 @@ phygpromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/9674822", 
 phygpromise.then(
 function(data)
 {
-    console.log("goodphyg")
+    console.log("goodphyg");
 })
 
 lzivpromise.then(
     function(data)
     {
         console.log("goodlziv",(data));
-       getAlbumivCover(data);
+       getAlbumlzivCover(data);
       
     }
 )
@@ -126,25 +126,25 @@ hothpromise.then (
     }
 )
 
+
+
 var getAlbumlziiiCover = function (alb)
 {
-   console.log("goodphyg2",alb)
+   console.log("goodlziii2",alb)
     
    /*var albumtr = d3.select("#albumcover")
     .select("tbody")
     .selectAll("tr")
     .data(alb)
     .enter()
-    .append("tr");
-    
-    albumtr.select("tr")
-    .append("td")
-    .append("img")
-    .attr("src", function(d){return d.cover_big});
+    .append("tr"); 
     
     albumtr.append("td")
-    .append("p")
-    .text(function(d) {return d.title})*/
+    .append("img")
+    .attr("src", alb.cover);
+    
+    albumtr.append("td")
+    .text(alb.title)*/
     
     d3.select("#albumcover")
     .select("img")
@@ -156,15 +156,11 @@ var getAlbumlziiiCover = function (alb)
     d3.select("#albumcover")
     .append("p")
     .text(alb.title)
-     .on("click", function (songlist)
+    //click
+    .on("click", function (songlist)
+         
     {
-       // var clear = function ()
-       // {
-       //     d3.select("#songlist")
-       //     .remove()
-       // }
-      //  clear();
-        
+       
         var promisesl = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/11590966/tracks", {
 	"method": "GET",
 	"headers": {
@@ -174,12 +170,16 @@ var getAlbumlziiiCover = function (alb)
 })
         promisesl.then(function (songs)
 {
+           d3.selectAll("li").remove();
             console.log("goodsongs", songs);
             getSongList(songs);
 })
         
+        
              var getSongList = function (song)
 {
+
+    d3.selectAll("ol").remove();
     console.log("goodfcn",song);
     d3.select ("#songlist")
     .selectAll("ol")
@@ -194,10 +194,13 @@ var getAlbumlziiiCover = function (alb)
 	"headers": {
 		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
 		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
+       
 	}
 })
+        
         infopromise.then(function(info)
         {
+              d3.selectAll("tr").remove()
             console.log("infogood",info)
             getSongInfo(info)
         })
@@ -205,8 +208,20 @@ var getAlbumlziiiCover = function (alb)
 })
 }
 
+ /* tracks.data.sort(function(a,b)
+{
+    if (a.duration > b.duration)
+    {
+        return 1;
+    }
 
-
+    else if(a.duration< b.duration)
+    {
+        return -1;
+    }
+    else {return 0;}
+  })
+*/
 //master function for dispaying led zeppelin III
 var getAlbumlziiiCover = function (alb)
 {
@@ -238,7 +253,8 @@ var getAlbumlziiiCover = function (alb)
     d3.select("#albumcover")
     .append("p")
     .text(alb.title)
-     .on("click", function (songlist)
+    //click
+    .on("click", function (songlist)
     {
        // var clear = function ()
        // {
@@ -256,6 +272,7 @@ var getAlbumlziiiCover = function (alb)
 })
         promisesl.then(function (songs)
 {
+            d3.selectAll("li").remove()
             console.log("goodsongs", songs);
             getSongList(songs);
 })
@@ -280,6 +297,7 @@ var getAlbumlziiiCover = function (alb)
 })
         infopromise.then(function(info)
         {
+              d3.selectAll("tr").remove()
             console.log("infogood",info)
             getSongInfo(info)
         })
@@ -319,6 +337,7 @@ var getAlbumlziCover = function (alb)
     d3.select("#albumcover")
     .append("p")
     .text(alb.title)
+    //click
      .on("click", function (songlist)
     {
        // var clear = function ()
@@ -337,6 +356,7 @@ var getAlbumlziCover = function (alb)
 })
         promisesl.then(function (songs)
 {
+              d3.selectAll("li").remove()
             console.log("goodsongs", songs);
             getSongList(songs);
 })
@@ -361,6 +381,7 @@ var getAlbumlziCover = function (alb)
 })
         infopromise.then(function(info)
         {
+              d3.selectAll("tr").remove()
             console.log("infogood",info)
             getSongInfo(info)
         })
@@ -389,7 +410,7 @@ var getAlbumhothCover = function (alb)
     .append("p")
     .text(function(d) {return d.title})*/
     
-    d3.select("#albumcover")
+   d3.select("#albumcover")
     .select("img")
     .data(alb)
     .enter()
@@ -399,6 +420,7 @@ var getAlbumhothCover = function (alb)
     d3.select("#albumcover")
     .append("p")
     .text(alb.title)
+    //click
      .on("click", function (songlist)
     {
        // var clear = function ()
@@ -417,6 +439,7 @@ var getAlbumhothCover = function (alb)
 })
         promisesl.then(function (songs)
 {
+              d3.selectAll("li").remove()
             console.log("goodsongs", songs);
             getSongList(songs);
 })
@@ -441,6 +464,7 @@ var getAlbumhothCover = function (alb)
 })
         infopromise.then(function(info)
         {
+              d3.selectAll("tr").remove()
             console.log("infogood",info)
             getSongInfo(info)
         })
@@ -453,7 +477,7 @@ var getAlbumlziiCover = function (alb)
 {
    console.log("goodlzii2",alb)
     
-   /*var albumtr = d3.select("#albumcover")
+  /*var albumtr = d3.select("#albumcover")
     .select("tbody")
     .selectAll("tr")
     .data(alb)
@@ -469,7 +493,7 @@ var getAlbumlziiCover = function (alb)
     .append("p")
     .text(function(d) {return d.title})*/
     
-    d3.select("#albumcover")
+   d3.select("#albumcover")
     .select("img")
     .data(alb)
     .enter()
@@ -479,15 +503,10 @@ var getAlbumlziiCover = function (alb)
     d3.select("#albumcover")
     .append("p")
     .text(alb.title)
+    //click
      .on("click", function (songlist)
     {
-       // var clear = function ()
-       // {
-       //     d3.select("#songlist")
-       //     .remove()
-       // }
-       // clear();
-        
+    
         var promisesl = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/7824595/tracks", {
 	"method": "GET",
 	"headers": {
@@ -497,6 +516,7 @@ var getAlbumlziiCover = function (alb)
 })
         promisesl.then(function (songs)
 {
+              d3.selectAll("li").remove()
             console.log("goodsongs", songs);
             getSongList(songs);
 })
@@ -521,6 +541,7 @@ var getAlbumlziiCover = function (alb)
 })
         infopromise.then(function(info)
         {
+              d3.selectAll("tr").remove()
             console.log("infogood",info)
             getSongInfo(info)
         })
@@ -530,7 +551,7 @@ var getAlbumlziiCover = function (alb)
 
 
 //master function for displaying led zeppelin IV
-var getAlbumivCover = function (alb)
+var getAlbumlzivCover = function (alb)
 {
    console.log("goodlziv2",alb)
     
@@ -550,17 +571,17 @@ var getAlbumivCover = function (alb)
     .append("p")
     .text(function(d) {return d.title})*/
     
-    d3.select("#albumcover")
+   d3.select("#albumcover")
     .select("img")
-    //.data(alb)
-    //.enter()
-    .append("p")
+    .data(alb)
+    .enter()
     .append("img")
     .attr("src", function(d){return d.cover_big})
     
     d3.select("#albumcover")
     .append("p")
     .text(alb.title)
+    //click
     .on("click", function (songlist)
     {
         //var clear = function ()
@@ -580,6 +601,7 @@ var getAlbumivCover = function (alb)
 )
         promisesl.then(function (songs)
 {
+              d3.selectAll("li").remove()
             console.log("goodsongs", songs);
             getSongList(songs);
 })
@@ -604,6 +626,7 @@ var getAlbumivCover = function (alb)
 })
         infopromise.then(function(info)
         {
+              d3.selectAll("tr").remove()
             console.log("infogood",info)
             getSongInfo(info)
         })
@@ -611,31 +634,6 @@ var getAlbumivCover = function (alb)
     
 })
 }
-
-var getSongList = function (song)
-{
-    console.log("goodfcn",song);
-    d3.select ("#songlist")
-    .selectAll("ol")
-    .data(song.data)
-    .enter()
-    .append("li")
-    .text(function(d) {return d.title_short})
-    .on("click", function (infobox)
-{
-        var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733/tracks", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-		"x-rapidapi-key": "c123de1447msh95ba0341d524584p15de3cjsn57eea2ac5be5"
-	}
-})
-        infopromise.then(function(info)
-        {
-            console.log("infogood",info)
-            getSongInfo(info)
-        })
-})}
     
 
 var getSongInfo = function (info)
