@@ -1,13 +1,17 @@
-
+body{
+    
+    background-color: #faf2d8
+}
 
 td
 {
    
     float: left;
-    background-color:skyblue;
-    width:200px;
+    float:top;
+    background-color:#cb7259;
+    width:300px;
     color: aliceblue;
-    font-size:10px;
+    font-size:20px;
    
    
 }
@@ -15,8 +19,15 @@ td
 #albumcover
 {
    
-    width:600px;
+    width:400px;
     height:auto;
+    float: top;
+    font-size: 20px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: #66212b;
+
+    
     
    
 }
@@ -27,24 +38,27 @@ td
    
     float:left;
     float:top;
-    background-color:skyblue;
+    background-color:#cb7259;
     width:auto;
     height:auto;
     color: white;
-    font-size: 40px;
+    font-size: 35px;
    
    
 }
 
 h1
 {
-    color:darkgoldenrod;
+    color:#66212b; 
     text-align: center;
+    border-bottom: solid;
+    border-color: #cb7259;
+    
 }
 
 h2
 {
-    width:200px;
+    width:400px;
     background-color:darkblue;
     color:white;
    
@@ -55,9 +69,11 @@ h2
 {
     float:left;
     width:200px;
-    background-color: skyblue;
+    background-color: #cb7259;
     color: white;
-    font-size:15px;
+    font-size:40px;
     clear:bottom;
+    
+   
 }
 
