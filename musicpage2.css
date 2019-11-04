@@ -19,10 +19,11 @@ td
 #albumcover
 {
    
-    width:400px;
+    width:600px;
     height:auto;
     float: top;
     font-size: 20px;
+    color:gold;
     border-style: solid;
     border-width: 10px;
     border-color: #66212b;
