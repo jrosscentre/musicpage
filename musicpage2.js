@@ -208,20 +208,7 @@ var getAlbumlziiiCover = function (alb)
 })
 }
 
- /* tracks.data.sort(function(a,b)
-{
-    if (a.duration > b.duration)
-    {
-        return 1;
-    }
 
-    else if(a.duration< b.duration)
-    {
-        return -1;
-    }
-    else {return 0;}
-  })
-*/
 //master function for dispaying led zeppelin III
 var getAlbumlziiiCover = function (alb)
 {
@@ -576,7 +563,7 @@ var getAlbumlzivCover = function (alb)
     .data(alb)
     .enter()
     .append("img")
-    .attr("src", function(d){return d.cover_big})
+    .attr("src", alb.cover)
     
     d3.select("#albumcover")
     .append("p")
@@ -604,17 +591,19 @@ var getAlbumlzivCover = function (alb)
               d3.selectAll("li").remove()
             console.log("goodsongs", songs);
             getSongList(songs);
+             sortSongs(info);
 })
         
         var getSongList = function (song)
 {
-    console.log("goodfcn",song);
+    console.log("goodsl",song);
     d3.select ("#songlist")
     .selectAll("ol")
     .data(song.data)
     .enter()
     .append("li")
     .text(function(d) {return d.title_short})
+    d3.select("songinfobut")
     .on("click", function (infobox)
 {
         var infopromise = d3.json("https://deezerdevs-deezer.p.rapidapi.com/album/8887733/tracks", {
@@ -626,8 +615,10 @@ var getAlbumlzivCover = function (alb)
 })
         infopromise.then(function(info)
         {
+            
               d3.selectAll("tr").remove()
             console.log("infogood",info)
+           
             getSongInfo(info)
         })
 })}
@@ -638,6 +629,7 @@ var getAlbumlzivCover = function (alb)
 
 var getSongInfo = function (info)
 {
+    
     var albumtr = d3.select("#info")
     .select("tbody")
     .selectAll("tr")
@@ -646,10 +638,35 @@ var getSongInfo = function (info)
     .append("tr");
     
     albumtr.append("td")
-    .text(function (d) {return d.title_version})
+    .text(function(d){return d.title})
     
     albumtr.append("td")
     .text(function (d){return d.duration/60})
+    
+    albumtr.append("td")
+    .text(function(d){return d.disk_number})
+    
+    albumtr.append("td")
+    .text(function(d){return d.track_position})
+    
+}
+
+
+
+var sortSongs = function(sng)
+{
+         console.log("work")
+    d3.select("#sortby").on("click",function()
+    {
+        d3.selectAll("ol").remove();
+        
+        sng.sort(function(a,b)
+                  {
+                    return b.data.duration-a.data.duration;
+                   })
+        getSongInfo(sng);
+        
+    })
 }
        /// return songlist.tracks.data
 
